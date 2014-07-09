@@ -7,10 +7,11 @@ manage ip and rack database
 ソースがもったいないので公開します。
 
 * 動作環境
+
 - FreeBSD6.3
 - MySQL5.2
 - PHP5.2
 - Apache2.2
 
-* 
+
 
