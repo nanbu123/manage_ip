@@ -15,6 +15,5 @@ manage ip and rack database
 2. PHP5.2
 3. Apache2.2
 
-
-
+※ github公開用に文字コードをutf-8に変更していますが、元はeucのコードです。
 
