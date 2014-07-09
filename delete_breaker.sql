@@ -1,0 +1,1 @@
+DELETE FROM `breaker` WHERE dc_loc=2 and floor=5;

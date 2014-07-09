@@ -1,0 +1,1 @@
+ALTER TABLE `patch` ADD `length` TEXT CHARACTER SET ujis COLLATE ujis_japanese_ci NOT NULL AFTER `type` ;
