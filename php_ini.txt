@@ -1,0 +1,11 @@
+// php.ini の設定
+
+//「magic」関係の設定
+//display_errors On
+//magic_quotes_gpc = Off
+
+//「mbstring」関係の設定
+//mbstring.language = Japanese
+//mbstring.internal_encoding = EUC-JP
+//mbstring.encoding_translation = Off
+
