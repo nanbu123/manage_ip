@@ -1,3 +1,4 @@
+<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <?php
 
 include_once('./lib/config.php');
@@ -123,7 +124,7 @@ $sel_level_new = SelOfArray("sel_level_new", $params['level'], $array_user_level
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-jp" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <meta http-equiv="Content-Style-Type" content="text/css" >
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <title>IP管理：ユーザ一覧</title>
@@ -198,7 +199,7 @@ if ($data) {
     foreach ($data as $row) { 
 ?>
   <tr>
-    <td><?php echo $row['name']; ?></td>
+    <td><?php echo htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8'); ?></td>
     <td>
 <?php
     // 権限レベルが自分のより低ければ編集できる
@@ -214,8 +215,8 @@ if ($data) {
     }
 ?>
     </td>
-    <td><input type="text" size="30" name="txt_comment_<?php echo $row['id']; ?>" value="<?php echo $row['comment']; ?>"></td>
-    <td><?php echo $row['update_user_name']; ?></td>
+    <td><?php echo htmlspecialchars($row['comment'], ENT_QUOTES, 'UTF-8'); ?></td>
+    <td><?php echo htmlspecialchars($row['update_user_name'], ENT_QUOTES, 'UTF-8'); ?></td>
     <td align="center">
 <?php if (check_auth('special_admin')) { ?>
         <input type="button" name="sub_update" value="更新" onclick="update_submit( <?php echo $row['id']; ?> );">
@@ -261,3 +262,5 @@ if ($data) {
 
 </body>
 </html>
+
+

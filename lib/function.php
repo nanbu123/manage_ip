@@ -1,3 +1,4 @@
+<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <?php
 
 // 指定したテーブル内の構成を表示
@@ -38,13 +39,13 @@ function check_login_pass($name, $pass, &$err_msg)
         // ログインまでは画面にエラーをだす これ以降はエラーログに出力
         $link = mysql_connect(SERVER_NAME, DB_USER, DB_PASS)
             or die('Could not connect: ' . mysql_error());
+        mysql_query("SET NAMES 'utf8'"); // ここに追加
         mysql_select_db(DB_NAME) or die('Could not select database');
         $pass_md5 = md5($pass);
         $where = " WHERE name='{$name}' AND password='{$pass_md5}'";
         $query = "SELECT * FROM " . TABLE_USER . $where;
         $result = mysql_query($query) or die('Query failed: ' . mysql_error());
         
-//        echo $query;    // debug
         // ユーザー名・パスワードが正しいか
         if ($result) {
             $row = mysql_fetch_array($result);
@@ -92,7 +93,7 @@ function check_ip_address($ip_address, &$err_msg)
                 if (($val < 8) || ($val > 30)) {
                     $err_flag_sub = true;
                     $err_msg_ip   .= '/' . '<strong>' . $val . '</strong>';
-                    $err_msg_sub  .= 'マスクビットは24〜30を指定してください<br>';
+                    $err_msg_sub  .= 'マスクビットは24～30を指定してください<br>';
                 } else {
                     $err_msg_ip .= '/' . $val;
                 }
@@ -104,7 +105,7 @@ function check_ip_address($ip_address, &$err_msg)
                 if (($val < 0) || ($val > 255)) {
                     $err_flag_sub = true;
                     $err_msg_ip   .= '<strong>' . $val . '</strong>';
-                    $err_msg_sub  .= 'アドレスは0〜255を指定してください<br>';
+                    $err_msg_sub  .= 'アドレスは0～255を指定してください<br>';
                 } else {
                     $err_msg_ip .= $val;
                 }

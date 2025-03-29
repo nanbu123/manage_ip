@@ -1,3 +1,4 @@
+<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <?php
 
 include_once('./lib/config.php');
@@ -464,7 +465,7 @@ $dns_data = $db->select(TABLE_DNS, "*", $dns_where);
 $end_c_year  = substr($company_info['end_contract_day'], 0, 4);
 $end_c_month = substr($company_info['end_contract_day'], 5, 2);
 $end_c_day   = substr($company_info['end_contract_day'], 8, 2);
-$sel_end_c_year = SelOfInt('end_c_year', $end_c_year, 2009, 2014, true);
+$sel_end_c_year = SelOfInt('end_c_year', $end_c_year, 2014, 2023, true);
 $sel_end_c_month = SelOfInt('end_c_month', $end_c_month, 1, 12, true);
 $sel_end_c_day = SelOfInt('end_c_day', $end_c_day, 1, 31, true);
 
@@ -472,7 +473,7 @@ $sel_end_c_day = SelOfInt('end_c_day', $end_c_day, 1, 31, true);
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-jp" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <meta http-equiv="Content-Style-Type" content="text/css" >
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <title>IP管理：一覧</title>
@@ -656,7 +657,7 @@ $sel_end_c_day = SelOfInt('end_c_day', $end_c_day, 1, 31, true);
     echo $result_msg;
 ?>
 <font color="red"><?php if ($err_flag) { echo $err_msg; } ?></font>
-<table width="600" class="input">
+<table width="700" class="input">
 <form name="company_form" action="./company_edit.php?id=<?php echo $id; ?>" method="POST">
   <caption style="text-align:left">会社情報</caption>
   <tr>
@@ -736,7 +737,7 @@ $sel_end_c_day = SelOfInt('end_c_day', $end_c_day, 1, 31, true);
         備考：
     </th>
     <td>
-        <textarea name="comment" cols="72" rows="5" style="font-size:9pt;"><?php echo $company_info['comment']; ?></textarea>
+        <textarea name="comment" cols="88" rows="5" style="font-size:9pt;"><?php echo $company_info['comment']; ?></textarea>
     </td>
   </tr>
   <tr>
@@ -752,7 +753,7 @@ $sel_end_c_day = SelOfInt('end_c_day', $end_c_day, 1, 31, true);
 
 <!-- ラック一覧 -->
 <form name="rack_form" action="" method="POST">
-<table width="700" class="list">
+<table width="800" class="list">
 <caption style="text-align:left">割当ラック一覧</caption>
   <tr>
     <th>ロケーション</th>
@@ -809,7 +810,7 @@ if ($rack_data) {
     <th>ポート</th>
     <th>割当先</th>
     <th>サービス品目</th>
-    <th>パッチパネル</th>
+    <th>パッチパネル/CID</th>
     <th>備考</th>
     <th>　</th>
   </tr>
@@ -820,8 +821,9 @@ if ($router_data) {
 ?>
   <tr>
     <td style="text-align:center;" id="<?php echo $row['router']; ?>-<?php echo substr($row['port'], -2); ?>">
-      <a href="https://xxx.xxx.xxx.xxx/eden/user/<?php echo $row['router']; ?>#<?php echo substr($row['port'], -2); ?>" target="_blank">Eden</a><br>
-      <a href="http://xxx.xxx.xxx.xxx/cgi-bin/cvsweb.cgi/router-config/<?php echo $row['router']; ?>" target="_blank">cfg</a>
+      <a href="https://traffic01.bit-isle.ne.jp/eden/user/<?php echo $row['router']; ?>#<?php echo substr($row['port'], -2); ?>" target="_blank">eden</a><br>
+      <a href="/cgi-bin/cvsweb.cgi/router-config/<?php echo $row['router']; ?>" target="_blank">cfg</a>
+      <a href="http://192.168.232.62/redirect.cgi?host=<?php echo $row['router']; ?>&port=<?php echo substr($row['port'], -2); ?>" target="_blank">cacti</a><br>
     </td>
     <td><a href="./router_list.php?router=<?php echo urlencode($row['router']); ?>"><?php echo $row['router']; ?></a></td>
     <td><a href="./router_list.php?router=<?php echo urlencode($row['router']); ?>"><?php echo $row['port']; ?></a></td>
@@ -831,8 +833,8 @@ if ($router_data) {
     <td><input type="text" size="24" name="txt_comment_<?php echo $row['id']; ?>" value="<?php echo $row['comment']; ?>"></td>
     <td align="center">
 <?php if (check_auth('update')) { ?>
-        <input type="button" name="sub_router_update" value="ポート更新" onclick="up_router_submit( <?php echo $row['id']; ?> );">
-        <input type="button" name="sub_router_delete" value="ポート解除" onclick="del_router_submit( <?php echo $row['id']; ?> );">
+        <input type="button" name="sub_router_update" style="font-size:7pt;" value="ポート更新" onclick="up_router_submit( <?php echo $row['id']; ?> );">
+        <input type="button" name="sub_router_delete" style="font-size:7pt;" value="ポート解除" onclick="del_router_submit( <?php echo $row['id']; ?> );">
 <?php } ?>
     </td>
   </tr>
@@ -861,9 +863,9 @@ if ($address_data) {
         サイズ
         <select name="add_mask_<?php echo $row['id']; ?>">
         <option value="24">24</option>
-        <option value="25" selected>25</option>
+        <option value="25">25</option>
         <option value="26">26</option>
-        <option value="27">27</option>
+        <option value="27" selected>27</option>
         <option value="28">28</option>
         <option value="29">29</option>
         <option value="30">30</option>

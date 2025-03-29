@@ -1,10 +1,10 @@
-// php.ini ã®è¨­å®š
+// php.ini ¤ÎÀßÄê
 
-//ã€Œmagicã€é–¢ä¿‚ã®è¨­å®š
+//¡Ömagic¡×´Ø·¸¤ÎÀßÄê
 //display_errors On
 //magic_quotes_gpc = Off
 
-//ã€Œmbstringã€é–¢ä¿‚ã®è¨­å®š
+//¡Ömbstring¡×´Ø·¸¤ÎÀßÄê
 //mbstring.language = Japanese
 //mbstring.internal_encoding = EUC-JP
 //mbstring.encoding_translation = Off

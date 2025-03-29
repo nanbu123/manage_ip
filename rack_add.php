@@ -1,3 +1,4 @@
+<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <?php
 
 include_once('./lib/config.php');
@@ -193,7 +194,7 @@ $sel_group_rack_size = SelOfArray("group_rack_size", $group_rack_size, $array_ra
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-jp" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <meta http-equiv="Content-Style-Type" content="text/css" >
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <title>IP管理：ラック登録</title>
