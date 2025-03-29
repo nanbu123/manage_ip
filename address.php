@@ -1,3 +1,4 @@
+<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <?php
 
 include_once('./lib/config.php');
@@ -36,13 +37,13 @@ function get_address($cur_page)
 {
     $link = mysql_connect(SERVER_NAME, DB_USER, DB_PASS)
         or die('Could not connect: ' . mysql_error());
+    mysql_query("SET NAMES 'utf8'"); // ここに追加
     mysql_select_db(DB_NAME) or die('Could not select database');
 
     $where = '';
     if ($_POST['txt_search']){
         $where = " WHERE ip like %" . $_POST['txt_search'] . "% or kaisha_name like %" . $_POST['txt_search'] . "%";
     }
-    $where = 
 
     $query = 'SELECT * FROM '. TABLE_ADDRESS .' ORDER BY id' . $where .' limit ' . ($cur_page-1)*PAGE_ROW . ', ' . PAGE_ROW ;
     $result = mysql_query($query) or die('Query failed: ' . mysql_error());
@@ -69,7 +70,6 @@ function get_address($cur_page)
 function add_address(&$error_str)
 {
     $error_str = '';
-    // nullチェック
     if ($_POST['add_address'] == '') {
         $error_str = '追加するIPアドレス名を入力してください。';
         return false;
@@ -82,13 +82,14 @@ function add_address(&$error_str)
     }
     $link = mysql_connect(SERVER_NAME, DB_USER, DB_PASS)
         or die('Could not connect: ' . mysql_error());
+    mysql_query("SET NAMES 'utf8'"); // ここに追加
     mysql_select_db(DB_NAME) or die('Could not select database');
 
     $query = "INSERT INTO mi_address (address, kishu, port, kaisha_name) values ('" .
              $_POST['add_address'] . "','" . $_POST['add_kishu'] . "','" . $_POST['add_port'] . "','" . $_POST['add_kaisha'] . "')";
     $result = mysql_query($query) or die('Query failed: ' . mysql_error());
-
 }
+
 // IPアドレスを削除
 function del_address($id)
 {
@@ -163,7 +164,7 @@ function set_paging($cur_page)
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-jp" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <meta http-equiv="Content-Style-Type" content="text/css" >
 <title>IP管理：一覧</title>
 </head>

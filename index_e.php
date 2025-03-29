@@ -1,4 +1,15 @@
-<?php header("Content-Type: text/html; charset=utf-8"); ?>
+<?php
+function db_access()
+{
+    $this->dbh = mysql_connect(SERVER_NAME, DB_USER, DB_PASS);
+    if (!$this->dbh) {
+        die('Could not connect: ' . mysql_error());
+    }
+    mysql_query("SET NAMES 'utf8'", $this->dbh); // ここに追加
+    if (!mysql_select_db(DB_NAME, $this->dbh)) {
+        die('Could not select database: ' . mysql_error());
+    }
+}<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <?php
 
 include_once('./lib/config.php');
@@ -42,7 +53,7 @@ $sel_bre_floor = SelOfArray("search_breaker_floor", $search_breaker_floor, $ar_f
 </script>
 <body>
 
-<h2>検索</h2>
+<h2>Search</h2>
 <!-- 全体 -->
 <table class="none">
 <tr>
@@ -56,10 +67,10 @@ $sel_bre_floor = SelOfArray("search_breaker_floor", $search_breaker_floor, $ar_f
 <table class="list"">
   <!--IPアドレス検索-->
   <form name="ip_form" action="./ip_list.php" method="POST">
-  <tr><th colspan="4">IPアドレスで検索</th></tr>
+  <tr><th colspan="4">Search by IP Address / IPアドレスで検索</th></tr>
   <tr>
     <td>
-        IPロケーション<br>
+        IP location<br>
         <?php echo $sel_ip_loc; ?>
     </td>
     <td>
@@ -68,45 +79,45 @@ $sel_bre_floor = SelOfArray("search_breaker_floor", $search_breaker_floor, $ar_f
     </td>
     <td>
         <br>
-        <input type="submit" name="sub_ip_address" value="検索">
-        <input type="submit" name="sub_ip_space" value="空きアドレス検索">
+        <input type="submit" name="sub_ip_address" value="search">
+        <input type="submit" name="sub_ip_space" value="seach avirable IP">
     </td>
     <td>
-        <br><input type="submit" name="sub_clear_ip" value="リセット">
+        <br><input type="submit" name="sub_clear_ip" value="clear">
     </td>
   </tr>
   </form>
   <!--会社名で検索-->
   <tr><td colspan="4">&nbsp;</td></tr>
   <form name="company_form" action="./company_list.php" method="POST">
-  <tr><th colspan="4">会社名で検索</th></tr>
+  <tr><th colspan="4">Search by account / 会社名で検索</th></tr>
   <tr>
     <td>
         　
     </td>
     <td>
-        例)セガ<br>
+        example)sega<br>
         <input type="text" name="company" size="40" value="<?php echo $_SESSION['search_cp']; ?>">
     </td>
     <td>
-        <br><input type="submit" name="sub_company" value="検索">
+        <br><input type="submit" name="sub_company" value="search">
     </td>
     <td>
-        <br><input type="submit" name="sub_clear_cp" value="リセット">
+        <br><input type="submit" name="sub_clear_cp" value="clear">
     </td>
   </tr>
   </form>
   <!--ラック名で検索-->
   <tr><td colspan="4">&nbsp;</td></tr>
   <form name="rack_form" action="./rack_list.php" method="POST">
-  <tr><th colspan="4">ラック名で検索</th></tr>
+  <tr><th colspan="4">search by cabinet / ラック名で検索</th></tr>
   <tr>
     <td>
-        DCロケーション・フロア<br>
+        IBX / Floor<br>
         <?php echo $sel_rack_dc_loc; ?><?php echo $sel_rack_floor; ?>
     </td>
     <td>
-        例)34A101<br>
+        example)34A101 <-- regacy Cabinet number<br>
         <input type="text" name="search_rack" size="40" value="<?php echo $_SESSION['search_rack']; ?>" style="ime-mode:disabled">
     </td>
     <td>
