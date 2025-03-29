@@ -8,12 +8,18 @@ manage ip and rack database
 某所で使われていたラックとIPアドレスを管理するデータベースです。
 ソースがもったいないので公開します。
 
+202503
+EUCからUTF8に変更して動くのが分かりました。（setupは直ってないかも）
+- dbの中身がUTF8
+- phpファイルがUTF8
+- ブラウザでの表示がUTF8
+
 * 動作環境
+PHP5.2の環境を作るのがとても苦労するのでdockerで構築
 
-- FreeBSD6.3
-1. MySQL5.2
-2. PHP5.2
-3. Apache2.2
+- docker
+1. mariadb55 on docker
+2. PHP5.2 on tommylau/php-5.2
+3. nginx on tommylau/nginx
 
-※ github公開用に文字コードをutf-8に変更していますが、元はeucのコードです。
 

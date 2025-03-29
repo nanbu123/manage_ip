@@ -6,7 +6,7 @@ define('ERROR_FILE', './log/error.log');
 // DB関連
 define('SERVER_NAME', 'mariadb55');
 define('DB_USER',     'user');
-define('DB_PASS',     'password');
+define('DB_PASS',     'xxxxxx');
 define('DB_NAME',     'manage_ip');
 
 // テーブル名
