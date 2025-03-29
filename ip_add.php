@@ -1,3 +1,4 @@
+<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <?php
 
 include_once('./lib/config.php');
@@ -106,7 +107,7 @@ $sel_group_ip_loc = SelOfArray("group_ip_loc", $group_ip_loc, $array_ip_location
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-jp" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <meta http-equiv="Content-Style-Type" content="text/css" >
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <title>IP管理：まとめ登録</title>

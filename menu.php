@@ -1,3 +1,4 @@
+<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <table class="none" valign="top">
   <tr>
     <td><a href="./index.php">検索画面</a></td>

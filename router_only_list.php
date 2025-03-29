@@ -1,3 +1,4 @@
+<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <?php
 
 include_once('./lib/config.php');
@@ -8,6 +9,12 @@ include_once('./lib/db_access.php');
 if (!check_session_login()) { exit; }
 
 // DB接続
+$link = mysqli_connect(SERVER_NAME, DB_USER, DB_PASS, DB_NAME);
+if (!$link) {
+    die('Could not connect: ' . mysqli_connect_error());
+}
+mysqli_set_charset($link, 'utf8');
+
 $db = new db_access();
 $err_flag = false;
 // パラメータ取得
@@ -128,7 +135,7 @@ $sel_ip_loc = SelOfArray("search_router_loc", $search_router_loc, $array_ip_loca
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-jp" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <meta http-equiv="Content-Style-Type" content="text/css" >
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <title>IP管理：ルータ一覧</title>

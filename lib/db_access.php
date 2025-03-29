@@ -1,3 +1,4 @@
+<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <?php
 
 //呼び出し元でincludeする
@@ -10,11 +11,16 @@ class db_access {
     // コンストラクタ
     function db_access()
     {
-        $dbh = mysql_connect(SERVER_NAME, DB_USER, DB_PASS);
-        if (!$dbg) {
-            
+        $this->dbh = mysql_connect(SERVER_NAME, DB_USER, DB_PASS);
+        if (!$this->dbh) {
+            die('Could not connect: ' . mysql_error());
         }
-        if (!mysql_select_db(DB_NAME)) {
+
+        // 文字コードをUTF-8に設定
+        mysql_query("SET NAMES 'utf8'", $this->dbh);
+
+        if (!mysql_select_db(DB_NAME, $this->dbh)) {
+            die('Could not select database: ' . mysql_error());
         }
     }
 
